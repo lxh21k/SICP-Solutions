@@ -1,0 +1,22 @@
+(load "../Ex1_21.scm")
+
+(define (timed-prime-test n)
+  (newline)
+  (display n)
+  (start-prime-test n (runtime)))
+(define (start-prime-test n start-time)
+  (if (prime? n)
+      (report-prime (- (runtime) start-time))))
+(define (report-prime elapsed-time)
+  (display " *** ")
+  (display elapsed-time))
+(define (prime? n)
+  (= (smallest-divisor n) n))
+
+(define (next-odd n)
+  (cond ((odd? n) (+ n 2))
+        (else (+ n 1))))
+
+(define (search-for-primes n)
+  (cond ((prime? (next-odd n)) (timed-prime-test (next-odd n)))
+        (else (search-for-primes (next-odd n)))))
